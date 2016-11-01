@@ -1,0 +1,1 @@
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/d/geamkdoeadoihdcnnkanojmdegppdmkh.svg?style=flat-square)](https://chrome.google.com/webstore/detail/soundcloud-player/geamkdoeadoihdcnnkanojmdegppdmkh)
