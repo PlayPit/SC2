@@ -1,0 +1,24 @@
+<html class="sc-extension-html" ng-app="sound-cloud-player" ng-csp style="height: 100%; max-height:100%; overflow:hidden">
+	<head>
+        <meta charset="UTF-8">
+		<script type="text/javascript" src="public/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="public/lib/angular.min.js"></script>
+		<script type="text/javascript" src="app/app.js"></script>
+        <script type="text/javascript" src="app/js/controllers.js"></script>
+		<script type="text/javascript" src="public/lib/jquery.resize.min.js"></script>
+		<script type="text/javascript" src="public/lib/resizer.js"></script>
+		<link rel="stylesheet" type="text/css" href="public/style/style.css" />
+		<title>SoundCloud</title>
+	</head>
+
+	<body class="sc-extension" ng-controller="StateController" style="overflow:hidden">
+		<div id="sc-extension" class="sc-extension-container" style="overflow:hidden">
+			<div ng-class="{'hidden':!currentUser.isLoginned}" style="overflow:hidden">
+				<div ng-include="playerPage" style="overflow:hidden" ></div>
+			</div>
+			<div ng-class="{'hidden':currentUser.isLoginned}" style="overflow:hidden">
+				<div ng-include="loginPage"></div>
+			</div>
+		</div>
+	</body>
+</html>

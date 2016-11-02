@@ -6,65 +6,58 @@ module.exports = function(grunt) {
             ' * SoundCloudPlayer v<%= pkg.version %>\n' +
             ' * Copyright 2015-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
             ' */\n',
-            
+
      //Clean release folder
      clean: {
        contents: 'release/'
      },
-     
+
      copy: {
         view: {
           expand: true,
-          cwd: 'trunk/extension/app/view/',
+          cwd: 'app/view/',
           src: '**',
-          dest: 'release/extension/app/view/',
+          dest: 'release/app/view/',
         },
         lib: {
           expand: true,
-          cwd: 'trunk/extension/lib/',
+          cwd: 'public/lib/',
           src: '**',
-          dest: 'release/extension/lib/',
+          dest: 'release/public/lib/',
         },
         font: {
           expand: true,
-          cwd: 'trunk/extension/style/font/',
+          cwd: 'public/style/font/',
           src: '**',
-          dest: 'release/extension/app/style/font/',
+          dest: 'release/public/style/font/',
         },
         icons: {
           expand: true,
-          cwd: 'trunk/icons/',
+          cwd: 'public/icons/',
           src: '**',
-          dest: 'release/extension/icons/',
+          dest: 'release/public/icons/',
         },
         files: {
           files: [
-            {cwd: 'trunk/extension/app/', src: 'app.js', dest: 'release/extension/app/', expand: true},
-            {cwd: 'trunk/', src: 'popup.html', dest: 'release/', expand: true},
-            {cwd: 'trunk/', src: 'background.html', dest: 'release/', expand: true},
-            {cwd: 'trunk/', src: 'manifest.json', dest: 'release/', expand: true},
-            {cwd: 'trunk/', src: 'redirect.html', dest: 'release/', expand: true},
-            {cwd: 'trunk/', src: 'window_mode.html', dest: 'release/', expand: true}
+            {cwd: 'app/', src: 'app.js', dest: 'release/app/', expand: true},
+            {cwd: '', src: 'popup.html', dest: 'release/', expand: true},
+            {cwd: '', src: 'background.html', dest: 'release/', expand: true},
+            {cwd: '', src: 'manifest.json', dest: 'release/', expand: true},
+            {cwd: '', src: 'redirect.html', dest: 'release/', expand: true},
+            {cwd: '', src: 'window_mode.html', dest: 'release/', expand: true}
           ]
         }
      },
-     
+
      less: {
         development: {
             options: {
                 paths: ["assets/css"]
             },
-            files: {"trunk/extension/style/theme.css": "trunk/extension/style/theme.less"}
+            files: {"public/style/theme.css": "public/style/theme.less"}
         },
-       /* production: {
-            options: {
-                paths: ["assets/css"],
-                cleancss: true
-            },
-            files: {"trunk/extension/style/theme.css": "trunk/extension/style/theme.less"}
-        }*/
      },
-     
+
      concat: {
         options: {
             banner: '<%= banner %>',
@@ -72,65 +65,57 @@ module.exports = function(grunt) {
         },
         background: {
           src: [
-            'trunk/extension/app/background/background.js',
-            'trunk/extension/app/background/apiHelper.js',
-            'trunk/extension/app/background/player.js',
-            'trunk/extension/app/background/playerHelper.js',
-            'trunk/extension/app/background/scHelper.js',
-            'trunk/extension/app/background/init.js',
+            'app/background/background.js',
+            'app/background/APIHelper.js',
+            'app/background/player.js',
+            'app/background/playerHelper.js',
+            'app/background/scHelper.js',
+            'app/background/init.js'
           ],
-          dest: 'release/extension/app/js/background.js'
+          dest: 'release/app/js/background.js'
         },
         controllers: {
           src: [
-            'trunk/extension/app/controller/homeTabController.js',
-            'trunk/extension/app/controller/itemsController.js',
-            'trunk/extension/app/controller/loginController.js',
-            'trunk/extension/app/controller/playerController.js',
-            'trunk/extension/app/controller/playListTabController.js',
-            'trunk/extension/app/controller/settingsTabController.js',
-            'trunk/extension/app/controller/stateController.js',
-            'trunk/extension/app/controller/tracksTabController.js',
+            'app/controller/homeTabController.js',
+            'app/controller/itemsController.js',
+            'app/controller/loginController.js',
+            'app/controller/playerController.js',
+            'app/controller/playListTabController.js',
+            'app/controller/settingsTabController.js',
+            'app/controller/stateController.js',
+            'app/controller/tracksTabController.js'
           ],
-          dest: 'release/extension/app/js/controllers.js'
+          dest: 'release/app/js/controllers.js'
         },
         styles : {
-           src: [
-             'trunk/extension/style/materialize-icons.css',
-             'trunk/extension/style/theme.css',
-           ],
-           dest: 'release/extension/app/style/style.css'
+           src: ['public/style/*.css'],
+           dest: 'release/public/style/style.css'
         }
      },
-     
+
      uglify: {
         app: {
             files: {
-              'release/extension/app/app.js': 'release/extension/app/app.js'
+              'release/app/app.js': 'release/app/app.js'
             }
         },
         background: {
             files: {
-              'release/extension/app/js/background.js': 'release/extension/app/js/background.js'
+              'release/app/js/background.js': 'release/app/js/background.js'
             }
         },
         controllers: {
             files: {
-              'release/extension/app/js/controllers.js': 'release/extension/app/js/controllers.js'
+              'release/app/js/controllers.js': 'release/app/js/controllers.js'
             }
         },
         soundcloud: {
             files: {
-              'release/extension/lib/soundmanager2.js': 'release/extension/lib/soundmanager2.js'
-            }
-        },
-        attrchange: {
-            files: {
-              'release/extension/lib/attrchange.js': 'release/extension/lib/attrchange.js'
+              'release/public/lib/soundmanager2.js': 'release/public/lib/soundmanager2.js'
             }
         }
      },
-     
+
      cssmin: {
         options: {
             shorthandCompacting: false,
@@ -138,16 +123,16 @@ module.exports = function(grunt) {
         },
         target: {
             files: {
-              'release/extension/app/style/style.css': 'release/extension/app/style/style.css'
+              'release/public/style/style.css': 'release/public/style/style.css'
             }
         }
     }
-     
+
   });
-  
+
   require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
   require('time-grunt')(grunt);
-  
+
   grunt.registerTask('build', ['clean','copy', 'less', 'concat']);
   grunt.registerTask('release', ['build', 'uglify', 'cssmin']);
 };
