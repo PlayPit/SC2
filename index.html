@@ -1,0 +1,23 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <script>
+    function getURLParameter(url, name) {
+      return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
+    }
+
+    var appId = getURLParameter(window.location.search, 'appId');
+
+    if(appId) {
+      var resourceBase = "chrome-extension://" + appId;
+      var scRequerLink = document.createElement('script');
+      scRequerLink.setAttribute("data-main", resourceBase + "/js/external/main.js");
+      scRequerLink.setAttribute('src',resourceBase + '/js/lib/requirejs/require.js');
+      document.head.appendChild(scRequerLink);
+    }
+</script>
+</head>
+<body>
+</body>
+</html>
+
